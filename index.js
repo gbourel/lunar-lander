@@ -258,7 +258,7 @@ document.addEventListener("keydown", ({ key }) => {
 
 document.addEventListener("keydown", ({ key }) => {
   if (key === "x") {
-    sendAsteroid = false;
-    asteroids = [];
+    asteroids.forEach((a) => a.destroy());
+    spaceAsteroids.forEach((a) => a.destroy());
   }
 });

@@ -3,18 +3,23 @@ import {
   seededRandomBetween,
   getVectorVelocity,
   transition,
+  clampedProgress,
+  easeInExpo,
 } from "./helpers/helpers.js";
 import { makeExplosion } from "./lander/explosion.js";
 import { LANDER_WIDTH, LANDER_HEIGHT } from "./helpers/constants.js";
 import { makeParticle } from "./particle.js";
 
 export const makeAsteroid = (state, getLanderPosition, onLanderCollision) => {
+  const CTX = state.get("CTX");
   const canvasWidth = state.get("canvasWidth");
   const canvasHeight = state.get("canvasHeight");
   const seededRandom = state.get("seededRandom");
+  const visibilityDuration = 5_000;
   const fill = state.get("theme").asteroid;
   const size = seededRandomBetween(12, 30, seededRandom);
   const leftOfScreen = seededRandomBool(seededRandom);
+  let timeOfExplosion = Date.now();
   let startPosition = {
     x: leftOfScreen ? 0 : canvasWidth,
     y: seededRandomBetween(0, canvasHeight / 2, seededRandom),
@@ -26,10 +31,11 @@ export const makeAsteroid = (state, getLanderPosition, onLanderCollision) => {
     y: seededRandomBetween(1, 4, seededRandom),
   };
 
-  let impact = false;
+  let explosion = false;
 
   const onImpact = (collisionPoint, collisionVelocity) => {
-    impact = makeExplosion(
+    timeOfExplosion = Date.now();
+    explosion = makeExplosion(
       state,
       collisionPoint,
       // Slow down velocity to prevent debris from going really high in the air
@@ -69,8 +75,28 @@ export const makeAsteroid = (state, getLanderPosition, onLanderCollision) => {
     onImpact
   );
 
+  const destroy = () => {
+    if (!explosion) {
+      timeOfExplosion = Date.now();
+      explosion = makeExplosion(
+        state,
+        asteroid.getPosition(),
+        // Slow down velocity to prevent debris from going really high in the air
+        {
+          x: asteroid.getVelocity().x * 0.4,
+          y: asteroid.getVelocity().y * 0.1,
+        },
+        fill,
+        // Smaller pieces for faster impacts (vaporized)
+        // Typical vector velocity range is .5–10
+        transition(15, 3, getVectorVelocity(asteroid.getVelocity()) / 10),
+        Math.floor(size)
+      );
+    }
+  };
+
   const draw = (deltaTime) => {
-    if (!impact) {
+    if (!explosion) {
       const landerPosition = getLanderPosition();
       const impactXPadding = LANDER_WIDTH;
       const impactYPadding = LANDER_HEIGHT;
@@ -86,10 +112,19 @@ export const makeAsteroid = (state, getLanderPosition, onLanderCollision) => {
       }
 
       asteroid.draw(deltaTime);
-    } else {
-      impact.draw(deltaTime);
+    } else if (explosion && Date.now() - timeOfExplosion < visibilityDuration) {
+      CTX.save();
+      const animationProgress = clampedProgress(
+        0,
+        visibilityDuration,
+        Date.now() - timeOfExplosion
+      );
+      CTX.globalAlpha = transition(1, 0, animationProgress, easeInExpo);
+
+      explosion.draw(deltaTime);
+      CTX.restore();
     }
   };
 
-  return { draw };
+  return { draw, destroy };
 };

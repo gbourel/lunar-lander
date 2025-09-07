@@ -2,6 +2,8 @@ import {
   getVectorVelocity,
   transition,
   randomBetween,
+  clampedProgress,
+  easeInExpo,
 } from "./helpers/helpers.js";
 import { makeExplosion } from "./lander/explosion.js";
 import { LANDER_WIDTH, LANDER_HEIGHT } from "./helpers/constants.js";
@@ -13,10 +15,13 @@ export const makeSpaceAsteroid = (
   getLanderPosition,
   onLanderCollision
 ) => {
+  const CTX = state.get("CTX");
   const canvasWidth = state.get("canvasWidth");
   const canvasHeight = state.get("canvasHeight");
   const fill = state.get("theme").asteroid;
   const size = randomBetween(12, 30);
+  const visibilityDuration = 5_000;
+  let timeOfExplosion = Date.now();
   let offScreen = false;
   let startPosition = {
     x: randomBetween(0, canvasWidth),
@@ -27,10 +32,10 @@ export const makeSpaceAsteroid = (
     y: -getLanderVelocity().y,
   };
 
-  let impact = false;
+  let explosion = false;
 
   const onImpact = (collisionPoint, collisionVelocity) => {
-    impact = makeExplosion(
+    explosion = makeExplosion(
       state,
       collisionPoint,
       // Slow down velocity to prevent debris from going really high in the air
@@ -70,13 +75,34 @@ export const makeSpaceAsteroid = (
     false
   );
 
+  const destroy = () => {
+    if (!explosion) {
+      timeOfExplosion = Date.now();
+      explosion = makeExplosion(
+        state,
+        asteroid.getPosition(),
+        // Slow down velocity to prevent debris from going really high in the air
+        {
+          x: asteroid.getVelocity().x * 0.4,
+          y: asteroid.getVelocity().y * 0.4,
+        },
+        fill,
+        // Smaller pieces for faster impacts (vaporized)
+        // Typical vector velocity range is .5–10
+        transition(15, 3, getVectorVelocity(asteroid.getVelocity()) / 10),
+        Math.floor(size),
+        false
+      );
+    }
+  };
+
   const draw = (deltaTime) => {
     if (!offScreen) {
       if (asteroid.getPosition().y > canvasHeight + size) {
         offScreen = true;
       }
 
-      if (!impact) {
+      if (!explosion) {
         const landerPosition = getLanderPosition();
         const impactXPadding = LANDER_WIDTH;
         const impactYPadding = LANDER_HEIGHT;
@@ -92,11 +118,23 @@ export const makeSpaceAsteroid = (
         }
 
         asteroid.draw(deltaTime);
-      } else {
-        impact.draw(deltaTime);
+      } else if (
+        explosion &&
+        Date.now() - timeOfExplosion < visibilityDuration
+      ) {
+        CTX.save();
+        const animationProgress = clampedProgress(
+          0,
+          visibilityDuration,
+          Date.now() - timeOfExplosion
+        );
+        CTX.globalAlpha = transition(1, 0, animationProgress, easeInExpo);
+
+        explosion.draw(deltaTime);
+        CTX.restore();
       }
     }
   };
 
-  return { draw };
+  return { draw, destroy };
 };
