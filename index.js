@@ -230,7 +230,7 @@ function onResetGame() {
 }
 
 function onAsteroidImpact(asteroidVelocity) {
-  lander.destroy(asteroidVelocity);
+  if (!lander.hasShield()) lander.destroy(asteroidVelocity);
 }
 
 // EXTRAS
@@ -260,5 +260,11 @@ document.addEventListener("keydown", ({ key }) => {
   if (key === "x") {
     asteroids.forEach((a) => a.destroy());
     spaceAsteroids.forEach((a) => a.destroy());
+  }
+});
+
+document.addEventListener("keydown", ({ key, metaKey }) => {
+  if (key === "z" && metaKey) {
+    lander.activateShield();
   }
 });

@@ -49,6 +49,7 @@ export const makeLander = (state, onGameEnd) => {
   let _engineOn;
   let _rotatingLeft;
   let _rotatingRight;
+  let _shieldActive;
 
   let _timeSinceStart;
   let gameEndData;
@@ -89,6 +90,7 @@ export const makeLander = (state, onGameEnd) => {
     _engineOn = false;
     _rotatingLeft = false;
     _rotatingRight = false;
+    _shieldActive = false;
 
     _timeSinceStart = 0;
     gameEndData = false;
@@ -406,7 +408,7 @@ export const makeLander = (state, onGameEnd) => {
               ((1000 / INTERVAL) * GRAVITY)
           )
         : 99;
-  
+
     CTX.save();
 
     CTX.fillStyle = state.get("theme").infoFontColor;
@@ -480,7 +482,7 @@ export const makeLander = (state, onGameEnd) => {
   const _drawLander = () => {
     CTX.save();
 
-    // The lander positions is handled differently in two "altitude zones"
+    // The lander position is handled differently in two "altitude zones"
     // Zone 1:
     //   The lander is close to the ground - the viewport is static, and the
     //   terrain is visible. The _position is the same as the display position
@@ -575,6 +577,16 @@ export const makeLander = (state, onGameEnd) => {
       CTX.fill();
     }
 
+    if (_shieldActive) {
+      console.log("drawing shield");
+      CTX.strokeStyle = "#1e00e2";
+      CTX.lineWidth = 2;
+      CTX.translate(LANDER_WIDTH / 2, LANDER_HEIGHT / 3);
+      CTX.beginPath();
+      CTX.arc(0, 0, LANDER_WIDTH * 2.5, 0, 2 * Math.PI);
+      CTX.stroke();
+    }
+
     CTX.restore();
   };
 
@@ -622,6 +634,8 @@ export const makeLander = (state, onGameEnd) => {
     getPosition: () => _position,
     getDisplayPosition: () => _displayPosition,
     getVelocity: () => _velocity,
+    activateShield: () => (_shieldActive = true),
+    hasShield: () => _shieldActive,
     engineOn: () => (_engineOn = true),
     engineOff: () => (_engineOn = false),
     rotateLeft: () => (_rotatingLeft = true),
