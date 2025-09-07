@@ -255,3 +255,10 @@ document.addEventListener("keydown", ({ key }) => {
     );
   }
 });
+
+document.addEventListener("keydown", ({ key }) => {
+  if (key === "x") {
+    sendAsteroid = false;
+    asteroids = [];
+  }
+});
