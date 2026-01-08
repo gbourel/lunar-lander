@@ -1,6 +1,6 @@
 export const GRAVITY = 0.0035;
-export const LANDER_WIDTH = 20;
-export const LANDER_HEIGHT = 40;
+export const LANDER_WIDTH = 25;
+export const LANDER_HEIGHT = 35;
 export const TRANSITION_TO_SPACE = LANDER_HEIGHT * 4;
 export const CRASH_VELOCITY = 0.6;
 export const VELOCITY_MULTIPLIER = 32;
