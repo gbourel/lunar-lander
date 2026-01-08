@@ -26,11 +26,11 @@ export const makeBonusPointsManager = (state) => {
   ]);
 
   const nameLabelMapping = new Map([
-    ["smallLandingSurface", "Landed"],
-    ["largeLandingSurface", "Landed"],
-    ["newRotation", "Flip!"],
-    ["newHeight", "Height record!"],
-    ["newSpeed", "Speed record!"],
+    ["smallLandingSurface", "Arrivé"],
+    ["largeLandingSurface", "Arrivé"],
+    ["newRotation", "Flip !"],
+    ["newHeight", "Record de hauteur !"],
+    ["newSpeed", "Record de vitesse !"],
   ]);
 
   const getPointValue = (name) => namePointMapping.get(name);
@@ -148,7 +148,7 @@ export const makeBonusPointsManager = (state) => {
 
       CTX.font = "400 16px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
       CTX.letterSpacing = "1px";
-      CTX.fillText(`${totalPoints} TOTAL BONUS`, 0, 12);
+      CTX.fillText(`${totalPoints} BONUS`, 0, 12);
       CTX.restore();
     }
   };

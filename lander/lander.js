@@ -3,10 +3,10 @@ import {
   seededRandomBetween,
   randomBool,
   getVectorVelocity,
-  velocityInMPH,
+  velocityInKMH,
   getAngleDeltaUpright,
   getAngleDeltaUprightWithSign,
-  heightInFeet,
+  heightInMeters,
   percentProgress,
 } from "../helpers/helpers.js";
 import { scoreLanding, scoreCrash } from "../helpers/scoring.js";
@@ -114,7 +114,7 @@ export const makeLander = (state, onGameEnd) => {
     gameEndData = {
       landed,
       struckByAsteroid,
-      speed: velocityInMPH(_velocity),
+      speed: velocityInKMH(_velocity),
       angle: Intl.NumberFormat().format(
         getAngleDeltaUpright(_angle).toFixed(1)
       ),
@@ -123,8 +123,8 @@ export const makeLander = (state, onGameEnd) => {
       ),
       rotationsInt: _rotationCount,
       rotationsFormatted: Intl.NumberFormat().format(_rotationCount),
-      maxSpeed: velocityInMPH(_maxVelocity),
-      maxHeight: heightInFeet(_maxHeight, _groundedHeight),
+      maxSpeed: velocityInKMH(_maxVelocity),
+      maxHeight: heightInMeters(_maxHeight, _groundedHeight),
       speedPercent: percentProgress(
         0,
         CRASH_VELOCITY,
@@ -312,7 +312,7 @@ export const makeLander = (state, onGameEnd) => {
   };
 
   const _drawHUD = () => {
-    const textWidth = CTX.measureText("100.0 MPH").width + 2;
+    const textWidth = CTX.measureText("100.0 KM/H").width + 2;
     const xPosBasis =
       Math.abs(_velocity.x) > 6
         ? canvasWidth / 2 - textWidth / 2
@@ -334,7 +334,7 @@ export const makeLander = (state, onGameEnd) => {
     CTX.font = "400 10px -apple-system, BlinkMacSystemFont, sans-serif";
     CTX.fillStyle = speedColor;
     CTX.fillText(
-      `${velocityInMPH(_velocity)} MPH`,
+      `${velocityInKMH(_velocity)} KM/H`,
       xPosBasis,
       yPosBasis - lineHeight
     );
@@ -346,7 +346,7 @@ export const makeLander = (state, onGameEnd) => {
     );
     CTX.fillStyle = state.get("theme").infoFontColor;
     CTX.fillText(
-      `${heightInFeet(_position.y, _groundedHeight)} FT`,
+      `${heightInMeters(_position.y, _groundedHeight)} M`,
       xPosBasis,
       yPosBasis + lineHeight
     );
@@ -415,24 +415,24 @@ export const makeLander = (state, onGameEnd) => {
     CTX.font = "800 24px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
     CTX.textAlign = "left";
     CTX.fillText(
-      `${velocityInMPH(_velocity, 0)}`,
+      `${velocityInKMH(_velocity, 0)}`,
       xPadding,
       canvasHeight - yPadding - 24
     );
     CTX.letterSpacing = "1px";
     CTX.font = "400 16px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
-    CTX.fillText("MPH", xPadding, canvasHeight - yPadding);
+    CTX.fillText("KM/H", xPadding, canvasHeight - yPadding);
 
     CTX.textAlign = "right";
     CTX.font = "800 24px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
     CTX.fillText(
-      `${heightInFeet(_position.y, _groundedHeight)}`,
+      `${heightInMeters(_position.y, _groundedHeight)}`,
       canvasWidth - xPadding,
       canvasHeight - yPadding - 24
     );
     CTX.letterSpacing = "1px";
     CTX.font = "400 16px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
-    CTX.fillText("FT", canvasWidth - xPadding, canvasHeight - yPadding);
+    CTX.fillText("M", canvasWidth - xPadding, canvasHeight - yPadding);
 
     if (secondsUntilTerrain < 20) {
       CTX.fillStyle = "rgb(255, 0, 0)";
@@ -446,7 +446,7 @@ export const makeLander = (state, onGameEnd) => {
       CTX.letterSpacing = "1px";
       CTX.font = "400 16px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
       CTX.fillText(
-        "SECONDS UNTIL TERRAIN",
+        "SECONDES AVANT SOL",
         canvasWidth / 2,
         canvasHeight - yPadding
       );
@@ -473,7 +473,7 @@ export const makeLander = (state, onGameEnd) => {
       );
       CTX.letterSpacing = "1px";
       CTX.font = "400 16px/1.5 -apple-system, BlinkMacSystemFont, sans-serif";
-      CTX.fillText("DURATION", canvasWidth / 2, canvasHeight - yPadding);
+      CTX.fillText("DUREE", canvasWidth / 2, canvasHeight - yPadding);
     }
 
     CTX.restore();

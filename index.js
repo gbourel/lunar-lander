@@ -259,7 +259,7 @@ document.addEventListener("keydown", ({ key }) => {
 document.addEventListener("keydown", ({ key }) => {
   if (key === "x") {
     asteroids.forEach((a) => a.destroy());
-    spaceAsteroids.forEach((a) => a.destroy());
+     spaceAsteroids.forEach((a) => a.destroy());
   }
 });
 

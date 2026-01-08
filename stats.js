@@ -14,17 +14,18 @@ export const showStatsAndResetControl = (
   };
   const canCopyText = navigator && navigator.clipboard;
 
-  const shareText = `Challenge #${state
-    .get("challengeManager")
-    .getChallengeNumber()}
-${data.scoreForDisplay} point ${data.landed ? "landing" : "crash"}
+  const shareText = '';
+//   const shareText = `Challenge #${state
+//     .get("challengeManager")
+//     .getChallengeNumber()}
+// ${data.scoreForDisplay} point ${data.landed ? "landing" : "crash"}
 
-${data.scoreDescription}
-https://ehmorris.com/lander/
+// ${data.scoreDescription}
+// https://ehmorris.com/lander/
 
-${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
-    data.rotationsInt === 1 ? "" : "s"
-  } | ${data.durationInSeconds}s`;
+// ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
+//     data.rotationsInt === 1 ? "" : "s"
+//   } | ${data.durationInSeconds}s`;
 
   const hideStats = () => {
     document
@@ -57,8 +58,8 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
     document.querySelector("#description").textContent = data.scoreDescription;
     document.querySelector("#score").textContent = data.scoreForDisplay;
     document.querySelector("#type").textContent = data.landed
-      ? "landing"
-      : "crash";
+      ? "d'arrivée"
+      : "de crash";
     populateMeter("speed", data.speedPercent, data.speed);
     populateMeter("angle", data.anglePercent, data.angle);
 
@@ -70,20 +71,20 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
 
     if (hasKeyboard) {
       document.querySelector("#tryAgainText").textContent =
-        "Play Again (Space)";
+        "Rejouer (Espace)";
     }
 
-    if (canShowShareSheet) {
-      if (document.querySelector("#copyText")) {
-        document.querySelector("#copyText").remove();
-      }
-    } else if (document.querySelector("#share")) {
-      document.querySelector("#share").remove();
-    }
+    // if (canShowShareSheet) {
+    //   if (document.querySelector("#copyText")) {
+    //     document.querySelector("#copyText").remove();
+    //   }
+    // } else if (document.querySelector("#share")) {
+    //   document.querySelector("#share").remove();
+    // }
 
-    if (!canCopyText && document.querySelector("#copyText")) {
-      document.querySelector("#copyText").remove();
-    }
+    // if (!canCopyText && document.querySelector("#copyText")) {
+    //   document.querySelector("#copyText").remove();
+    // }
   };
 
   function showShareSheet() {
@@ -110,15 +111,15 @@ ${data.speed}mph | ${data.angle}° | ${data.rotationsFormatted} flip${
       document.querySelector("#tryAgain").addEventListener("click", tryAgain);
     }, buttonDelayTime);
 
-    if (canShowShareSheet) {
-      document
-        .querySelector("#share")
-        .addEventListener("click", showShareSheet);
-    } else if (canCopyText) {
-      document
-        .querySelector("#copyText")
-        .addEventListener("click", copyShareStats);
-    }
+    // if (canShowShareSheet) {
+    //   document
+    //     .querySelector("#share")
+    //     .addEventListener("click", showShareSheet);
+    // } else if (canCopyText) {
+    //   document
+    //     .querySelector("#copyText")
+    //     .addEventListener("click", copyShareStats);
+    // }
 
     if (hasKeyboard) {
       // Delay showing the reset button in case the user is actively tapping

@@ -12,7 +12,7 @@ export const makeAudioManager = () => {
   let confetti1FileBuffer;
   let confetti2FileBuffer;
   let babyFileBuffer;
-  let themeAudio;
+  // let themeAudio;
 
   let engineFileBufferSource = false;
   let booster1FileBufferSource = false;
@@ -43,9 +43,9 @@ export const makeAudioManager = () => {
       // audio continuously with the HTML audio API will allow audio via the Web
       // Audio API to play on the main sound channel in iOS, rather than the
       // ringer channel.
-      themeAudio = new Audio("./audio/theme.mp3");
-      themeAudio.loop = true;
-      themeAudio.play();
+      // themeAudio = new Audio("./audio/theme.mp3");
+      // themeAudio.loop = true;
+      // themeAudio.play();
     }
   };
 
@@ -65,11 +65,11 @@ export const makeAudioManager = () => {
     { once: true }
   );
 
-  document.addEventListener("visibilitychange", () => {
-    if (themeAudio) {
-      document.hidden ? themeAudio.pause() : themeAudio.play();
-    }
-  });
+  // document.addEventListener("visibilitychange", () => {
+  //   if (themeAudio) {
+  //     document.hidden ? themeAudio.pause() : themeAudio.play();
+  //   }
+  // });
 
   async function _playTrack(audioBuffer, loop = true) {
     const playBuffer = (buffer) => {

@@ -7,80 +7,80 @@ import { progress } from "./helpers.js";
 
 export const landingScoreDescription = (score) =>
   score >= 120
-    ? "So. Much. Bonus. And you landed?? Incredible"
+    ? "Tellement de bonus. Et sans crash ?? Incroyable"
     : score >= 99
-    ? "Perfect landing, incredible, you can’t get better than this"
+    ? "Parfait, incroyable, vous avez atteint la perfection"
     : score >= 95
-    ? "Near-perfect landing, super smooth"
+    ? "Presque parfait, tout en douceur"
     : score >= 90
-    ? "Very nice landing, amazing"
+    ? "Impressionant, bravo"
     : score >= 85
-    ? "Pretty good landing, keep going!"
+    ? "Un succès, continuez comme ça !"
     : score >= 80
-    ? "A good landing, keep trying"
+    ? "Jolie arrivée"
     : score >= 75
-    ? "Just shy of a good landing"
+    ? "L'ombre d'une réelle réussite"
     : score >= 70
-    ? "A solid “C” landing"
+    ? "Ah oui, c'est un peu réussi"
     : score >= 65
-    ? "You landed but it could have been slower and straighter"
+    ? "Une arrivée plus douce et plus droite serait mieux"
     : score >= 60
-    ? "Not the worst landing, but not very good either"
+    ? "Pas l'arrivée la pire, mais pas la meilleure non plus"
     : score >= 55
-    ? "Pretty bad landing, but it could be worse"
+    ? "Une arrivée ratée, mais ça aurait pu être pire"
     : score >= 55
-    ? "Not great"
+    ? "Pas terrible"
     : score >= 40
-    ? "Basically a fender bender, but you landed"
+    ? "Vous avez confondu avec un fer à repasser ?"
     : score >= 30
-    ? "A near-crash, way too fast"
-    : "Terrible landing, you need to land slow and straight";
+    ? "On aurait cru à un crash, c'était tellement rapide"
+    : "Une arrivée catastrophique, il faut arriver lentement et droit";
 
 export const crashScoreDescription = (score) =>
   score >= 120
-    ? "So much bonus. So much crash."
+    ? "Tellement de bonus. Tellement de crashs."
     : score >= 100
-    ? "Unbelievable, the crater is visible from Earth"
+    ? "Incroyable ! Le cratère est visible de la terre"
     : score >= 95
-    ? "Ludicrous crash! The debris has entered orbit"
+    ? "Impressionnant ! Les débris du crash sont arrivés en orbite !"
     : score >= 90
-    ? "Incredible crash, the lander has vaporized"
+    ? "Un crash impressionnant !"
     : score >= 85
-    ? "Impressive speed, impressive angle - you crashed with style"
+    ? "Vitesse impressionnante, angle impressionnant - un crash qui a du style"
     : score >= 80
-    ? "A fast crash, but it could be faster"
+    ? "Un crash rapide, qui aurait pu être encore plus rapide"
     : score >= 75
-    ? "I think you meant to do that"
+    ? "C'était réellement voulu ce crash ?"
     : score >= 70
-    ? "You definitely did not land…"
+    ? "Ah oui, c'est sur l'arrivée est complètement ratée"
     : score >= 65
-    ? "I think there’s a problem with the lander"
+    ? "A priori il y a un problème avec cette arrivée"
     : score >= 60
-    ? "Sick crash!"
+    ? "Un crash impressionnant !"
     : score >= 50
-    ? "Were you trying to land, or…"
+    ? "Vous vous rapellez que le but est d'arriver en un seul morceau ?"
     : score >= 40
-    ? "A bad crash, but it could be worse"
+    ? "Un crash terrible, qui aurait pu être encore pire"
     : score >= 30
-    ? "I don’t think we’re getting back to Earth"
+    ? "...tant pis pour le retour sur terre on dirait"
     : score >= 20
-    ? "A smooth… wait… you crashed"
+    ? "En douceur… heu… un crash en douceur..."
     : score >= 10
-    ? "The lander has been… damaged"
+    ? "Le vaisseau est… détruit"
     : score < 0
-    ? "You have to land on the white landing zones"
-    : "So, so close to a landing, but still a crash";
+    ? "Il faut arriver sur la zone blanche"
+    : "Presque une arrivée normale, mais c'est un crash";
 
 export const destroyedDescription = () => {
   const remarks = [
-    "That rock came out of nowhere!",
-    "It looks like you’re out of fuel… oh and you blew up",
-    "So that was an asteroid",
-    "Weird, I can’t find the lander…",
-    "Try to avoid the space rocks next time",
-    "Slamming into rocks is not great for the lander",
-    "Sometimes asteroids just happen",
-    "Better to have flown and been destroyed by an asteroid than never to have flown at all",
+    "Cet astéroïde est venu de nulle part !",
+    "Un petit manque de fuel ? Oh, et vous avez explosé",
+    "Oui, c'était bien un astéroïde",
+    "Bizarre, je ne trouve plus le vaisseau…",
+    "Pour la prochaine fois, évitez les astéroïdes...",
+    "A priori entrer en collision avec un astéroïde n'est pas une bonne idée",
+    "Astéroïde 1 Attérisseur 0",
+    "Au moins vous avez essayé",
   ];
   return remarks[Math.floor(Math.random() * remarks.length)];
 };

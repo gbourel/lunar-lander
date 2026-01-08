@@ -57,13 +57,13 @@
     <div id="endGameStats" class="fullSizeContainer">
       <h1 id="description"></h1>
       <div class="scoreContainer">
-        <span id="score"></span> point <span id="type"></span>
+        <span id="score"></span> points <span id="type"></span>
       </div>
       <div class="meterAndLabel">
-        <div class="label">Speed</div>
+        <div class="label">Vitesse</div>
         <div class="meter" data-stat-name="speed">
           <div class="cursor" data-percent-position="">
-            <span data-value=""></span><span class="unit">&nbsp;MPH</span>
+            <span data-value=""></span><span class="unit">&nbsp;KM/H</span>
           </div>
         </div>
       </div>
@@ -77,36 +77,36 @@
       </div>
       <div class="statsTable">
         <div class="tableRow">
-          <span class="tableLabel">Time</span>
-          <span class="tableValue"><span id="duration"></span> seconds</span>
+          <span class="tableLabel">Durée</span>
+          <span class="tableValue"><span id="duration"></span> secondes</span>
         </div>
         <div class="tableRow">
           <span class="tableLabel">Flips</span>
           <span class="tableValue" id="rotations"></span>
         </div>
         <div class="tableRow">
-          <span class="tableLabel">Max Speed</span>
-          <span class="tableValue"><span id="maxSpeed"></span> MPH</span>
+          <span class="tableLabel">Vitesse max</span>
+          <span class="tableValue"><span id="maxSpeed"></span> km•h<sup>-1</sup></span>
         </div>
         <div class="tableRow">
-          <span class="tableLabel">Max Height</span>
-          <span class="tableValue"><span id="maxHeight"></span> FT</span>
+          <span class="tableLabel">Hauteur max</span>
+          <span class="tableValue"><span id="maxHeight"></span> M</span>
         </div>
       </div>
       <div class="buttonContainer">
         <div class="button loading" id="tryAgain" data-dd-action-name="Again">
-          <span id="tryAgainText">Play Again</span>
+          <span id="tryAgainText">Rejouer</span>
           <svg class="buttonAnimatedBorder">
             <rect width="100%" height="100%"></rect>
           </svg>
         </div>
-        <div class="button button--hug" id="share" data-dd-action-name="Share">
+        <!-- <div class="button button--hug" id="share" data-dd-action-name="Share">
           <span>Share</span>
           <svg class="buttonBorder">
             <rect width="100%" height="100%"></rect>
           </svg>
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           class="button button--hug"
           id="copyText"
           data-dd-action-name="Copy"
@@ -115,8 +115,8 @@
           <svg class="buttonBorder">
             <rect width="100%" height="100%"></rect>
           </svg>
-        </div>
-        <a
+        </div> -->
+        <!-- <a
           href="https://discord.gg/kqs93xgakf"
           target="_blank"
           rel="noopener noreferrer"
@@ -128,52 +128,50 @@
           <svg class="buttonBorder">
             <rect width="100%" height="100%"></rect>
           </svg>
-        </a>
+        </a> -->
       </div>
     </div>
     <div id="instructions" class="fullSizeContainer instructions">
       <div>
-        <h1>How to play</h1>
+        <h1>Comment jouer</h1>
         <p>
-          Land on a white landing pad. Pointy end goes up. Try doing a flip.
+          Il faut arriver sur la zone blanche et horizontale. La pointe vers le haut. Et vous pouvez même faire un flip.
         </p>
       </div>
       <div class="instructionsControls">
-        <h2>Test the controls</h2>
+        <h2>Tester les controles</h2>
         <div id="forKeyboard">
           <ul>
             <li id="engineCheck">
-              <input type="checkbox" /> Up arrow (the main engine)
+              <input type="checkbox" /> Flèche du haut (moteur principal)
             </li>
-            <li id="rightRotationCheck"><input type="checkbox" />Left arrow</li>
-            <li id="leftRotationCheck"><input type="checkbox" />Right arrow</li>
+            <li id="rightRotationCheck"><input type="checkbox" /> Flèche gauche</li>
+            <li id="leftRotationCheck"><input type="checkbox" /> Flèche droite</li>
             <li id="engineAndRotationCheck">
-              <input type="checkbox" /> Hold the up arrow while pressing the
-              left or right arrows
+              <input type="checkbox" /> Moteur principal et de coté en même temps.
             </li>
           </ul>
         </div>
         <div id="forTouch">
           <ul>
             <li id="engineCheck">
-              <input type="checkbox" /> Tap the center of the screen
+              <input type="checkbox" /> Touchez le centre de l'écran
             </li>
             <li id="rightRotationCheck">
-              <input type="checkbox" /> Tap the left side
+              <input type="checkbox" /> Touchez la partie gauche
             </li>
             <li id="leftRotationCheck">
-              <input type="checkbox" /> Tap the right side
+              <input type="checkbox" /> Touchez la partie droite
             </li>
             <li id="engineAndRotationCheck">
-              <input type="checkbox" /> Hold down on the center while you tap
-              the sides
+              <input type="checkbox" /> Maintenir le centre pandant que vous touchez un des cotés
             </li>
           </ul>
         </div>
       </div>
     </div>
     <div id="cornerChallenge" class="topLeftCorner show">
-      Daily Challenge <span id="cornerChallengeNumber"></span>
+      <span id="cornerChallengeNumber"></span>
     </div>
     <div id="tally" class="topRightCorner">
       L<span id="landingTotal"></span> C<span id="crashTotal"></span>

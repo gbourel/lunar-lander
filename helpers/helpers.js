@@ -64,13 +64,13 @@ export const getAngleDeltaUprightWithSign = (angle) => {
   return repeatingAngle > 180 ? repeatingAngle - 360 : repeatingAngle;
 };
 
-export const velocityInMPH = (velocity, decimals = 1) =>
+export const velocityInKMH = (velocity, decimals = 1) =>
   Intl.NumberFormat().format(
     (getVectorVelocity(velocity) * VELOCITY_MULTIPLIER).toFixed(decimals)
   );
 
-export const heightInFeet = (yPos, groundedHeight) =>
-  Intl.NumberFormat().format(-1 * Math.round((yPos - groundedHeight) / 3.5));
+export const heightInMeters = (yPos, groundedHeight) =>
+  Intl.NumberFormat().format(-1 * Math.round(((yPos - groundedHeight) / 3.5)*0.3));
 
 export const progress = (start, end, current) =>
   (current - start) / (end - start);
