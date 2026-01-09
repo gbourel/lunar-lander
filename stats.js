@@ -133,11 +133,11 @@ export const showStatsAndResetControl = (
   const detachEventListeners = () => {
     document.querySelector("#tryAgain").removeEventListener("click", tryAgain);
 
-    if (canShowShareSheet) {
+    /*if (canShowShareSheet) {
       document
         .querySelector("#share")
         .removeEventListener("click", showShareSheet);
-    }
+    }*/
 
     if (hasKeyboard) {
       document.removeEventListener("keydown", tryAgainOnSpace);
