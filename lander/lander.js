@@ -169,7 +169,7 @@ export const makeLander = (state, onGameEnd) => {
       _velocity = { x: 0, y: 0 };
     }
 
-    DD_RUM.onReady(() => {
+    /*DD_RUM.onReady(() => {
       DD_RUM.addAction("score", {
         score: gameEndData.landerScore,
         landed: !!landed,
@@ -180,7 +180,7 @@ export const makeLander = (state, onGameEnd) => {
         maxSpeed: gameEndData.maxSpeed,
         maxHeight: gameEndData.maxHeight,
       });
-    });
+    });*/
 
     onGameEnd(gameEndData);
   };
